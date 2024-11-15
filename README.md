@@ -1,6 +1,6 @@
 Komplettes Theme: finales_theme.zip
 
-Bisheriges Theme überarbeiten:
+Bisheriges Theme überarbeiten:<br>
 Code bearbeiten ->
 
 Sections: <br>
