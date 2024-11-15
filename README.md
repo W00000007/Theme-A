@@ -1,31 +1,31 @@
 Code bearbeiten ->
 
-Sections: 
-main-product.liquid
-image-with-text.liquid
-video-slider.liquid
-image-banner-slider.liquid
-O-Garantie.liquid
+Sections: <br>
+main-product.liquid<br>
+image-with-text.liquid<br>
+video-slider.liquid<br>
+image-banner-slider.liquid<br>
+O-Garantie.liquid<br>
 
 
-Snippets:
-cart-drawer.liquid
-product-variant-picker.liquid
-product-media.liquid
-product-media-gallery.liquid
-buy-buttons.liquid
+Snippets:<br>
+cart-drawer.liquid<br>
+product-variant-picker.liquid<br>
+product-media.liquid<br>
+product-media-gallery.liquid<br>
+buy-buttons.liquid<br>
 
-Assets:
-base.css
-component-cart-drawer.css
-component-cart-items.css
-image-banner-slider.css
-section-main-product.css
-global.js
-Datei hinzufügen: c-style.css.liquid
+Assets:<br>
+base.css<br>
+component-cart-drawer.css<br>
+component-cart-items.css<br>
+image-banner-slider.css<br>
+section-main-product.css<br>
+global.js<br>
+Datei hinzufügen: c-style.css.liquid<br>
 
-Layout:
+Layout:<br>
 theme.liquid -> Suche nach „{{ 'base.css' | asset_url | stylesheet_tag }}“ und füge folgendes darunter ein: „{{ 'c-style.css' | asset_url | stylesheet_tag }}“
 
-Config:
+Config:<br>
 settings_schema.json
