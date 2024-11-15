@@ -44,6 +44,8 @@ Produktseite fehlt? -> Code bearbeiten -> Ordner "template" -> product.json erst
 
 Normale Seite fehlt? -> Code bearbeiten -> Ordner "template" -> page.json erstellen<br>
 <br>
+
+Nachdem die jeweilige Vorlage erstellt wurde, den jeweiligen Code hieraus kopieren: https://github.com/W00000007/Theme-A/blob/main/Vorlagen%20fehlen%3F
 ________________________________________
 
 Produktseite<br>
