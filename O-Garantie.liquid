@@ -1,0 +1,362 @@
+
+{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+{%- endstyle -%}
+
+<section class="Section section-{{ section.id }}-padding" id="section-{{ section.id }}">
+    <div class="Container-Garantie">
+      <div class="Container-context-garantie"  style="background-color: {{ section.settings.box_background_color }};">
+        <div class="content-block-summary-garantie {{ section.settings.text_align }}">
+          <div class="content-block-titles-garantie">
+            <div class="garantie-titel" style="color: {{ section.settings.text_color }};">{{ section.settings.title }}</div>
+            <div class="garantie-text" style="color: {{ section.settings.text_color }}; padding-left: {{ section.settings.padding_left_text }}px; padding-right: {{ section.settings.padding_right_text }}px; padding-top: {{ section.settings.padding_top_text }}px; padding-bottom: {{ section.settings.padding_bottom_text }}px;">{{ section.settings.description }}</div>
+            <div class="Bewertungen-CTA" style="padding-top: {{ section.settings.padding_top_reviews }}px; padding-bottom: {{ section.settings.padding_bottom_reviews }}px;">
+              <a href="{{ section.settings.button_url }}" class="Bewertungen-Button Button Button--primary" style="background-color: {{ section.settings.button_background_color }}; color: {{ section.settings.button_text_color }}; border-radius: {{ section.settings.border_radius }}px;">
+                {{ section.settings.button_text }}
+              </a>
+            </div>
+              <div class="Bewertungen">
+                <div class="Bewertungen-Icons">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="#F6A429" class="bi bi-star-fill" viewBox="0 0 16 16">
+                    <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
+                  </svg>
+                   <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="#F6A429" class="bi bi-star-fill" viewBox="0 0 16 16">
+                    <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
+                  </svg>
+                     <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="#F6A429" class="bi bi-star-fill" viewBox="0 0 16 16">
+                    <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
+                  </svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="#F6A429" class="bi bi-star-fill" viewBox="0 0 16 16">
+                    <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
+                  </svg>
+                   <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="#F6A429" class="bi bi-star-fill" viewBox="0 0 16 16">
+                    <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
+                  </svg>
+                </div>
+                <div class="Bewertungen-Text" style="color: {{ section.settings.text_color }};">
+                 {{ section.settings.stars_text }}
+                </div>
+            </div>
+          </div>
+           {%- if section.settings.image != blank -%}
+          <div class="content-block-summary-image" style="text-align: center;">
+            {% capture width %}width: {{ section.settings.image_width }}%; height: auto;{% endcapture %}
+            {{ section.settings.image | image_url: width: 350 | image_tag: style: width }}
+          </div>
+          {%- endif -%}
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  
+  
+  
+  <style>
+  .Container-Garantie {
+    justify-content: center;
+    width: 100%;
+    padding-bottom: 40px;
+    padding-top: 40px;
+    margin: 0 auto;
+  }
+  
+  .Container-context-garantie {
+    max-width: 1100px;
+    box-shadow: 0px 5px 25px 0px rgba(0, 0, 0, .15);
+    border-radius: 20px;
+    padding: 30px;
+    margin: 0 auto;
+  }
+  
+  .content-block-summary-garantie {
+    max-width: 1250px;
+    display: flex;
+    text-align: center;
+    justify-content: space-around;
+    align-items: center;
+    margin: 0 auto;
+    padding-top: 20px;
+  }
+
+  .content-block-summary-garantie.center {
+    text-align: center!important;
+  }
+
+  .content-block-summary-garantie.left {
+    text-align: left!important;
+  }
+  
+  .content-block-summary-garantie.right {
+    text-align: right!important;
+  }
+  
+  .content-block-titles-garantie, .content-block-summary-image {
+    width: 50%;
+  }
+  
+  .garantie-titel {
+    font-size: 30px;
+    line-height: normal;
+    font-weight: 600;
+  }
+  
+  .garantie-text {
+    font-size: 16px;
+  }
+  
+  .Bewertungen-Button {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding: 15px;
+    font-weight: 600;
+  }
+  
+  .Bewertungen-CTA {
+    text-align: left;
+  }
+  
+  .Bewertungen {
+    display: flex;
+    align-items: flex-start;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    flex-direction: column;
+  }
+  
+  .Bewertungen-Text {
+    font-size: 16px;
+  }
+  
+  .Bewertungen-Icons {
+    padding-right: 15px;
+  }
+  
+  .content-block-summary-image img {
+    width: 100%;
+  }
+  
+  @media screen and (max-width: 769px) {
+    .content-block-summary-garantie {
+      flex-direction: column-reverse;
+    }
+    .content-block-titles-garantie, .content-block-summary-image {
+      width: 100%;
+    }
+    .Bewertungen {
+      flex-direction: column;
+      text-align: center;
+      line-height: normal;
+      align-items: center;
+    }
+    .Bewertungen-CTA {
+      text-align: center;
+    }
+  }
+  
+  </style>
+  {% schema %}
+  {
+    "name": "O Garantie",
+    "class": "shopify-section--bordered",
+    "settings": [
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Title",
+        "default": "100% Zufriedenheits Garantie"
+      },
+      {
+        "type": "textarea",
+        "id": "description",
+        "label": "Description",
+        "default": "Wir lieben unser Triple™ - 4-in-1 Trockentuch und sind überzeugt, dass Sie es auch werden! Das ist der Grund, weshalb wir eine 30 Tägige Geld-Zurück-Garantie anbieten. Wenn Sie nicht zufrieden mit dem Ergebnis sind, geben wir Ihnen Ihr Geld zurück."
+      },
+      {
+        "type": "text",
+        "id": "stars_text",
+        "label": "Stars Text",
+        "default": "Bewertet mit 4.8/5 von 20.000+ zufriedenen Kunden"
+      },
+      {
+        "type": "text",
+        "id": "button_text",
+        "label": "Button Text",
+        "default": "Jetzt Angebot sichern"
+      },
+      {
+        "type": "url",
+        "id": "button_url",
+        "label": "Button URL"
+      },
+  {
+      "type": "range",
+      "id": "padding_top_text",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Top Padding Text",
+      "default": 16
+  },
+  {
+      "type": "range",
+      "id": "padding_bottom_text",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Bottom Padding Text",
+      "default": 16
+  },
+  {
+      "type": "range",
+      "id": "padding_left_text",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Left Text Padding",
+      "default": 0
+  },
+  {
+      "type": "range",
+      "id": "padding_right_text",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Right Text Padding",
+      "default": 0
+  },
+  {
+      "type": "range",
+      "id": "padding_top_reviews",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Top Reviews Padding",
+      "default": 12
+  },
+  {
+      "type": "range",
+      "id": "padding_bottom_reviews",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Bottom Reviews Padding",
+      "default": 12
+  },
+      {
+        "type": "select",
+        "id": "text_align",
+        "label": "Text",
+        "default": "left",
+        "options": [
+          {
+            "value": "left",
+            "label": "Text Left"
+          },
+          {
+            "value": "center",
+            "label": "Text Center"
+          },
+          {
+            "value": "right",
+            "label": "Text Right"
+          }
+        ]
+      },
+      {
+        "type": "color",
+        "id": "box_background_color",
+        "label": "Box Background Color",
+        "default": "#ffffff"
+      },
+      {
+        "type": "color",
+        "id": "text_color",
+        "label": "Text Color",
+        "default": "#000000"
+      },
+      {
+        "type": "color",
+        "id": "button_background_color",
+        "label": "Button Background Color",
+        "default": "#F6A429"
+      },
+      {
+        "type": "color",
+        "id": "button_text_color",
+        "label": "Button Text Color",
+        "default": "#ffffff"
+      },
+      {
+        "type": "range",
+        "id": "border_radius",
+        "label": "Border Radius",
+        "default": 0,
+        "min": 0,
+        "max": 50
+      },
+      {
+        "type": "image_picker",
+        "id": "image",
+        "label": "Image"
+      },
+      {
+        "type": "range",
+        "id": "image_width",
+        "label": "Image Width (%)",
+        "default": 50,
+        "min": 10,
+        "max": 100,
+        "step": 1
+      },
+      {
+    "type": "header",
+    "content": "Section Spacing"
+  },
+  {
+    "type": "range",
+    "id": "padding_top",
+    "min": 0,
+    "max": 180,
+    "step": 2,
+    "unit": "px",
+    "label": "Padding Top",
+    "default": 100
+  },
+  {
+    "type": "range",
+    "id": "padding_bottom",
+    "min": 0,
+    "max": 180,
+    "step": 2,
+    "unit": "px",
+    "label": "Padding Bottom",
+    "default": 100
+  }
+    ],
+    "presets": [
+      {
+        "category": "Advanced",
+        "name": "O Garantie",
+        "settings": {}
+      }
+    ]
+  }
+  
+  {% endschema %}
