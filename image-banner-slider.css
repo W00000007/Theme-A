@@ -1,0 +1,154 @@
+.hero-slide-item {
+  position: relative;
+  padding-inline: 3rem;
+}
+
+.hero-media {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  left: 0;
+  top: 0;
+  z-index: -1;
+}
+
+.image-banner-slider-icons {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+}
+
+.image-banner-slider-icons-item {
+  display: flex;
+  flex-direction: column;
+}
+
+.image-banner-text {
+  max-width: 350px;
+  text-align: center;
+}
+
+.hero-media img {
+  display: block;
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}
+
+.hero-media img + img {
+  display: none;
+}
+
+.hero-content {
+    width: 100%;
+    max-width: 50%;
+    padding: 15rem 0;
+}
+
+.hero-content h1 {
+  color: var(--color-text);
+  font-size: 5.2rem;
+  line-height: 115%;
+  margin: 2rem 0;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.hero-content > span {
+  color: var(--color-text);
+  font-size: 1.6rem;
+  display: block;
+  margin-bottom: 2rem;
+  display: flex;
+  align-items: center;
+  line-height: 1;
+  gap: 1rem;
+}
+
+.hero-content p {
+  color: var(--color-text);
+  font-size: 2.2rem;
+  line-height: 1.5;
+  margin: 2rem 0;
+  margin-top: 10px;
+}
+
+.hero-content > img {
+  max-width: 50rem;
+  height: auto;
+  width: 100%;
+  margin: 2rem 0;
+}
+
+.btns-wrapper {
+  /* display: flex; */
+  margin: 2rem 0;
+}
+
+.hero-content .button-vendor {
+  min-width: 170px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 15px 0;
+  border: 1px solid;
+  font-size: 24px;
+  font-weight: 700;
+  border-radius: 60px;
+  text-decoration: none;
+  max-width: 70%;
+  column-gap: 20px;
+  transition: all 0.4s;
+  text-transform: uppercase;
+  line-height: 1.6;
+}
+
+hero-slider .swiper-pagination {
+  bottom: 2.4rem !important;
+}
+
+hero-slider .swiper-pagination-bullet {
+  background-color: #fff;
+}
+
+/* Media Queries */
+@media screen and (max-width: 1023px) {
+  .hero-content h1 {
+    font-size: 5rem;
+  }
+  .hero-content {
+    max-width: unset;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .hero-content h1 {
+    font-size: 3rem;
+  }
+  .hero-content>span {
+    font-size: 1.4rem;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .hero-content p {
+    font-size: 1.4rem;
+  }
+  .hero-media img + img {
+    display: block;
+  }
+  .image-banner-slider-icons {
+    max-width: 350px;
+}
+  .hero-content .button-vendor {
+    min-width: 150px;
+  }
+  hero-slider .swiper-pagination {
+    bottom: 1.2rem !important;
+  }
+  .hero-content>img {
+    max-width: 30rem;
+  }
+  .hero-content .button-vendor {
+    max-width: unset;
+    font-size: 1.6rem;
+  }
+}
