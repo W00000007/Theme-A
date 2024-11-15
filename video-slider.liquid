@@ -1,0 +1,300 @@
+{{ 'video-slider-popup.css' |  asset_url |  stylesheet_tag }}
+
+{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+{%- endstyle -%}
+
+<div class="video-slider-section section-{{ section.id }}-padding" style="background-color: {{ section.settings.background }};">
+
+  <div class="videoGrid page-width">
+    <div class="section_header">
+      <div class="hidden-pdp-title-desktop">
+        {% if section.settings.title != blank %}
+          <div class="section_header_left" style="text-align: {{ section.settings.title_alignment }}; margin-top: 0!important;">
+              <h2 style="font-size: {{ section.settings.font_size_desktop }}; font-weight: {{ section.settings.font_weight_desktop }};">{{ section.settings.title }}</h2>
+              {% if section.settings.description != blank %}
+                <p>{{ section.settings.description_desktop }}</p>
+              {% endif %}
+          </div>
+        {% endif %}
+      </div>
+      <div class="hidden-pdp-title-mobile">
+        {% if section.settings.title != blank %}
+          <div class="section_header_left" style="text-align: {{ section.settings.title_alignment }};">
+              <h2 style="font-size: {{ section.settings.font_size_mobile }}; font-weight: {{ section.settings.font_weight_mobile }};">{{ section.settings.title }}</h2>
+              {% if section.settings.description != blank %}
+                <p>{{ section.settings.description_mobile }}</p>
+              {% endif %}
+          </div>
+        {% endif %}
+      </div>
+        {% if section.settings.link != blank and section.settings.link_text != blank %}
+          <div class="section_header_right">
+              <a href="{{ section.settings.link }}">{{ section.settings.link_text }} <svg width="7" height="12" viewBox="0 0 7 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M6.44948 6.13717C6.44948 6.24717 6.43038 6.3503 6.39219 6.44655C6.35399 6.5428 6.2967 6.62912 6.22031 6.70551L1.87389 11.0519C1.70067 11.2251 1.5033 11.3079 1.28177 11.3003C1.06024 11.2927 0.865451 11.2048 0.697396 11.0368C0.52934 10.8687 0.445312 10.6739 0.445312 10.4524C0.445312 10.2309 0.52934 10.0361 0.697396 9.86801L4.45573 6.13259L0.697395 2.37426C0.52934 2.2062 0.449132 2.01141 0.45677 1.78988C0.464409 1.56835 0.552257 1.37356 0.720312 1.20551C0.888368 1.03745 1.08316 0.953422 1.30469 0.953422C1.52621 0.953422 1.72316 1.04003 1.89552 1.21325L6.22031 5.55967C6.2967 5.64217 6.35399 5.73155 6.39219 5.8278C6.43038 5.92405 6.44948 6.02717 6.44948 6.13717Z" fill="#5994FF"/>
+              </svg>
+              </a>
+          </div>
+        {% endif %}
+      </div>
+    <video-review-slider class="swiper portfolioSlider">
+      <div class="swiper-wrapper">
+            {% for block in section.blocks %}
+                {% if block.settings.video != blank and block.settings.poster != blank %}
+                    <div class="swiper-slide" id="slide-{{ forloop.index }}">
+                    <div class="videoitem">
+                        <div class="videoPreview">
+                        {{ block.settings.poster |  image_url: width: 300 |  image_tag: loading: "lazy"  }}
+                        <button class="myBtn">
+                            <svg width="50" height="50" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="40" cy="40" r="40" fill="#f6f6f6"></circle>
+                            <path d="M36.3095 30.8364C34.5923 29.8138 33.2002 30.6515 33.2002 32.7059V47.8667C33.2002 49.9232 34.5923 50.7598 36.3095 49.7382L49.0735 42.1387C50.7913 41.1157 50.7913 39.4584 49.0735 38.4358L36.3095 30.8364Z" fill="#0f266c"></path>
+                            </svg>
+                        </button>
+                        </div>
+                    </div>
+                    </div>
+                {% endif %}
+            {% endfor %}
+      </div>
+    </video-review-slider>
+    {% for block in section.blocks %}
+      {% if block.settings.video != blank %}
+    <div class="VideoModal" id="slide-{{ forloop.index }}-modal">
+      <div class="modal">
+        <div class="modal-content">
+          <span class="close">&times;</span>
+          <div class="modal-body">
+            {{ block.settings.video | video_tag: image_size: '700x', loop: true, controls: false, muted: false, playsinline: true }}
+          </div>
+        </div>
+      </div>
+    </div>
+        {% endif %}
+    {% endfor %}
+  </div>
+</div>
+
+<script>
+ // Get all buttons that open the modals
+var buttons = document.getElementsByClassName("myBtn");
+
+// Loop through all buttons and attach the click event listener
+for (var i = 0; i < buttons.length; i++) {
+  buttons[i].addEventListener("click", function() {
+    var modalMain = this.closest(".videoitem").parentNode.id + "-modal";
+    var modal = document.getElementById(modalMain).getElementsByClassName("modal")[0];
+
+    modal.style.display = "block";
+    var video = modal.getElementsByTagName("video")[0];
+    video.play();
+  });
+}
+
+// Get all close buttons
+var closeButtons = document.querySelectorAll(".VideoModal .close");
+
+// Loop through all close buttons and attach the click event listener
+for (var i = 0; i < closeButtons.length; i++) {
+  closeButtons[i].addEventListener("click", function() {
+    var modal = this.closest(".modal");
+    modal.style.display = "none";
+    var video = modal.getElementsByTagName("video")[0];
+    video.pause();
+  });
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.addEventListener("click", function(event) {
+  var modals = document.querySelectorAll(".VideoModal .modal");
+  for (var i = 0; i < modals.length; i++) {
+    if (event.target == modals[i]) {
+      modals[i].style.display = "none";
+        var video = modals[i].getElementsByTagName("video")[0];
+        video.pause();
+    }
+  }
+});
+
+</script>
+
+<style>
+@media screen and (min-width: 999px) {
+  .swiper-wrapper {
+  justify-content: center;
+  }
+}
+@media screen and (max-width: 769px) {
+  #slide-1 {
+  margin: 0 auto!important;
+}
+  #slide-2 {
+  margin-left: 16px!important;
+  }
+}
+</style>
+
+{% schema %}
+{
+  "name": "Review Videos",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Title"
+    },
+    {
+      "type": "header",
+      "content": "Title size"
+    },
+    {
+      "type": "text",
+      "id": "font_size_desktop",
+      "label": "Title size (Desktop)",
+      "default": "24px"
+    },
+    {
+      "type": "text",
+      "id": "font_size_mobile",
+      "label": "Product title size (Mobile)",
+      "default": "18px"
+    },
+    {
+      "type": "header",
+      "content": "Product title weight"
+    },
+    {
+      "type": "select",
+      "id": "font_weight_desktop",
+      "label": "Title weight (Desktop)",
+      "options": [
+        {
+          "value": "400",
+          "label": "Leicht"
+        },
+        {
+          "value": "500",
+          "label": "Normal"
+        },
+        {
+          "value": "600",
+          "label": "Fett"
+        }
+      ],
+      "default": "500"
+    },
+    {
+      "type": "select",
+      "id": "font_weight_mobile",
+      "label": "Title weight (Mobile)",
+      "options": [
+        {
+          "value": "400",
+          "label": "Leicht"
+        },
+        {
+          "value": "500",
+          "label": "Normal"
+        },
+        {
+          "value": "600",
+          "label": "Fett"
+        }
+      ],
+      "default": "500"
+    },
+    {
+      "type": "header",
+      "content": "Title alignment"
+    },
+    {
+      "type": "select",
+      "id": "title_alignment",
+      "label": "Title alignment",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ],
+      "default": "left"
+    },
+    {
+      "type": "textarea",
+      "id": "description_desktop",
+      "label": "Description Desktop"
+    },
+    {
+      "type": "textarea",
+      "id": "description_mobile",
+      "label": "Description Mobile"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.all.padding.section_padding_heading"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 150,
+      "step": 2,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_top",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 150,
+      "step": 2,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_bottom",
+      "default": 36
+    }
+       ],
+     "blocks":[
+      {
+        "type":"video",
+        "name":"Video",
+        "settings":[
+          {
+            "type":"video",
+            "id":"video",
+            "label":"Video"
+          },
+          {
+            "type":"image_picker",
+            "id":"poster",
+            "label":"Video Thumbnail"
+          }
+        ]
+      }
+    ],
+   "presets": [
+     {
+       "name": "Review Videos"
+     }
+   ]
+}
+{% endschema %}
