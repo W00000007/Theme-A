@@ -32,3 +32,22 @@ theme.liquid -> Suche nach „{{ 'base.css' | asset_url | stylesheet_tag }}“ u
 
 Config:<br>
 settings_schema.json
+<br>
+
+________________________________________
+
+Vorlagen fehlen<br>
+
+Startseite fehlt? -> Code bearbeiten -> Ordner "template" -> index.json erstellen<br>
+
+Produktseite fehlt? -> Code bearbeiten -> Ordner "template" -> product.json erstellen<br>
+
+Normale Seite fehlt? -> Code bearbeiten -> Ordner "template" -> page.json erstellen<br>
+<br>
+________________________________________
+
+Produktseite<br>
+
+Add To Cart Button zu weit oben?<br>
+1. Code bearbeiten -> Ordner "assets" -> c-style.css.liquid erstellen und code einfügen<br>
+2. Code bearbeiten -> Ordner "template" -> theme.liquid -> Suche nach „{{ 'base.css' | asset_url | stylesheet_tag }}“ und füge folgendes darunter ein: „{{ 'c-style.css' | asset_url | stylesheet_tag }}“<br>
