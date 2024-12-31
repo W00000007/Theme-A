@@ -519,7 +519,7 @@
 
         <div class="cart-drawer__footer" {{ block.shopify_attributes }}>
           {%- if settings.show_discount_code -%}
-          <div id="discount-container">
+          <div id="discount-container" >
             <input type="text" placeholder="Gutscheincode" id="discount-code-input" autocomplete="on" value="">
             <button id="apply-discount-btn">Einlösen</button>
             <div class="discount-container-applied">
@@ -528,8 +528,15 @@
                   <span class="applied-discount-code-value"></span>
                 </span>
               </span>
+                            <div class="u_discount_applied_outer_block">
+              <div class="u_discount_applied_block" id="clear-discount-btn">
+                <span class="u_discount_icon">  {{- 'icon-discount.svg' | inline_asset_content -}}</span>
+                <span class="u_discount_val"></span>
+                  <span class="u_discount_icon">&#10005</span>
+              </div> 
+                              </div>
               <small id="discount-code-error"></small>
-            </div>
+            </div>                
           </div>
            {%- endif -%}
           <div>
@@ -554,7 +561,7 @@
         <div>
             <div class="total-prices" style="font-size: 13px; font-weight: 600; color: #646464;">
                 {% if total_compared_price > 0 %}
-                    <span id="subtotal-price" class="cart-line-price">{{ total_compared_price | money_with_currency }}</span>
+                    <span id="subtotal-price" class="cart-line-price gg">{{ cart.original_total_price | money_with_currency }}</span>
                 {% else %}
                     {% assign regular_price = 0 %}
                     {% for item in cart.items %}
@@ -567,13 +574,40 @@
         </div>
     </div>
 
+  
+
     <div class="cart__total-container-2">
         <span class="cart-heading" style="font-size: 12px; color: green;">Du sparst</span>
         <span id="total-discount" style="font-size: 12px; font-weight: 700; color: green;">
-            {{ total_discount | money_with_currency }}
+            {{ cart.total_discount | money_with_currency }}
         </span>
     </div>
+  {% assign total_compared_price = 0 %}
+{% assign shipping_discount = 0 %}
 
+{% for item in cart.items %}
+    {% if item.variant.compare_at_price %}
+        {% assign compared_item_price = item.variant.compare_at_price | times: item.quantity %}
+        {% assign total_compared_price = total_compared_price | plus: compared_item_price %}
+    {% else %}
+        {% assign compared_item_price = item.original_price | times: item.quantity %}
+        {% assign total_compared_price = total_compared_price | plus: compared_item_price %}
+    {% endif %}
+{% endfor %}
+
+{% assign total_discount = total_compared_price | minus: cart.total_price %}
+
+{% if cart.total_price > 4000 %}
+    {% assign shipping_discount = 290 %}
+{% endif %}
+
+{% assign savings = total_discount | plus: shipping_discount %}
+<div class="cart__total-container-2" style="display:none">
+  <span class="cart-heading" style="font-size: 12px; color: green;">Du sparst</span>
+  <span id="total-discount" style="font-size: 12px; font-weight: 700; color: green;">
+    {{ savings | money_with_currency }}
+  </span>
+</div>
   
           <div class="cart__total-container-2">
      <span class="cart-heading-shipping" style="font-size: 12px; color: #646464;">Versand</span>
@@ -583,7 +617,7 @@
 <!-- Debug: Free Shipping Threshold (in Cent): {{ free_shipping_threshold }} -->
 
 {% if cart.total_price < free_shipping_threshold %}
-    4,95
+    {{ settings.u_shipping_price | times: 100 | money_with_currency  }}
 {% else %}
     Kostenlos
 {% endif %}
