@@ -1423,6 +1423,10 @@ customElements.define('cart-upsell-swiper', cartUpsellSwiper);
 
           // Optional: Open the cart drawer if it's not already open
           document.body.classList.add('cart-drawer-open');
+             if(localStorage.getItem("discountCode") != undefined){
+              $('.u_discount_applied_outer_block').show();
+                $('.u_discount_applied_block .u_discount_val').text(localStorage.getItem("discountCode"));                                      
+        } 
         }
       })
       .catch(error => {
@@ -1449,7 +1453,7 @@ function initializeElements() {
   // if (localStorage.discountCode) applyDiscount(JSON.parse(localStorage.discountCode).code);
 
   if (applyBtn) {
-    applyBtn.addEventListener("click", function (e) {
+    $(document).on('click','#apply-discount-btn',function(e){
       e.preventDefault();
       applyDiscount(discountCodeInput.value);
     });
@@ -1464,16 +1468,18 @@ function initializeElements() {
 }
 
 function clearDiscount() {
-  discountCodeValue.innerHTML = "";
-  discountCodeError.innerHTML = "";
   clearLocalStorage();
-  fetch("/checkout?discount=%20");
+  // jQuery.post('/checkout?discount=%20');
+  // // fetch("/checkout?discount=%20");
+  fetch('/checkout?discount=CLEAR')
 }
 
 function clearLocalStorage() {
   if (discountCodeWrapper) discountCodeWrapper.style.display = "none";
   if (totalCartSelector) totalCartSelector.innerHTML = JSON.parse(localStorage.discountCode).totalCart;
   localStorage.removeItem("discountCode");
+   setTimeout(() => refreshCartDrawer(), 500);
+              setTimeout(() => initializeElements(), 1500);
 }
 
 function applyDiscount(code) {
@@ -1523,16 +1529,18 @@ function applyDiscount(code) {
                   'code': code.trim(),
                   'totalCart': data.checkout.total_line_items_price
                 };
-                localStorage.setItem("discountCode", JSON.stringify(localStorageValue));
-                if (totalCartSelector) totalCartSelector.innerHTML = "<s>" + data.checkout.total_line_items_price + "</s>" + data.checkout.total_price;
+                localStorage.setItem("discountCode", code.trim());
+                    $('.u_discount_applied_outer_block').show();
+                $('.u_discount_applied_block .u_discount_val').text(localStorage.getItem("discountCode"));
+                if (totalCartSelector)                  
+                  totalCartSelector.innerHTML = "<s>" + data.checkout.total_line_items_price + "</s>" + data.checkout.total_price;
               } else {
                 if (discountCodeValue) discountCodeValue.innerHTML = "";
-                clearLocalStorage();
-                if (discountCodeError) discountCodeError.innerHTML = "Please Enter Valid Coupon Code.";
+                //clearLocalStorage();
+                if (discountCodeError) discountCodeError.innerHTML = "Rabattcode kann nicht eingelöst werden.";
               }
             }).finally(() => {
               if (applyBtn) {
-                applyBtn.innerHTML = "APPLY";
                 applyBtn.style.pointerEvents = "all";
               }
               setTimeout(() => refreshCartDrawer(), 500);
