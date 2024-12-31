@@ -51,7 +51,7 @@
            {%- if section.settings.image != blank -%}
           <div class="content-block-summary-image" style="text-align: center;">
             {% capture width %}width: {{ section.settings.image_width }}%; height: auto;{% endcapture %}
-            {{ section.settings.image | image_url: width: 350 | image_tag: style: width }}
+            {{ section.settings.image | image_url: width: 800 | image_tag: style: width }}
           </div>
           {%- endif -%}
         </div>
