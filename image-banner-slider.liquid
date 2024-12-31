@@ -53,7 +53,8 @@
               {% endif %}
             {% endif %}
           </div>
-          <div class="hero-content">
+          <div class="hero-content"> 
+          <div class="hero_content_inner">
           <span> {% if block.settings.show_stars %}{% render 'hero-slide-stars' %}{% endif %} {{ block.settings.review_text  }}</span>
             <h1>{{ block.settings.title |  replace: "(","<span>" |  replace: ")","</span>"  }}</h1>
             <p>{{ block.settings.desc }}</p>
@@ -86,17 +87,19 @@
                </div>
             {% endif %}
           </div>
-            <div class="btns-wrapper">
+            <div class="button button--primary slide-button" style="background-color: {{ block.settings.background_bg }}; border-color: {{ block.settings.border_color }};">
               {% if block.settings.link != blank %}
-                <a href="{{ block.settings.link }}" class="button-vendor" style="background-color: {{ block.settings.background_bg }}; color: {{ block.settings.button_text_color }}; border-color: {{ block.settings.border_color }};">{{ block.settings.link_text }}
+                <a href="{{ block.settings.link }}" style="color: {{ block.settings.button_text_color }};">{{ block.settings.link_text }}
                <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor" class="bi bi-arrow-right" viewBox="0 0 16 16">
   <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8" stroke="{{ block.settings.button_text_color }}" stroke-width="0.5"/>
-</svg></a>
+</svg>
+  </a>
               {% endif %}
             </div>
           </div>
         </div>
       </div>
+        </div>
           {% endfor %}
     </div>
     <div class="swiper-pagination"></div>
@@ -104,7 +107,86 @@
 
   </div>
 <style>
+  .hero_content_inner>span {
+    color: var(--color-text);
+    font-size: 1.6rem;
+    display: block;
+    margin-bottom: 2rem;
+    display: flex;
+    align-items: center;
+    line-height: 1;
+    gap: 1rem;
+}
+  .hero-media {
+    position: unset;
+  }
+  .hero-slide-item {
+    position: relative;
+    padding-inline: 0;
+}
+  .hero_content_inner {
+    position: absolute;
+    top: 50%;
+    left: 3%;
+    transform: translateY(-50%);
+    width: 50%;       
+}
+
+.button:after {
+ position: relative; 
+}
+  
+.slide-button {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  border: 0;
+  padding: 0 3rem;
+  cursor: pointer;
+  font: inherit;
+  font-size: 1.5rem;
+  text-decoration: none;
+  transition: box-shadow var(--duration-short) ease;
+  -webkit-appearance: none;
+  appearance: none;
+}
+.slide-button a {
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.slide-button::after {
+  box-shadow: 1px 1px 1px black!important;
+}
+  .hero-content {
+    width: 100%;
+    max-width: 50%;
+    padding: 0;
+}
+  {%  if section.settings.slide_height == 'large' %}
+    .hero-media {
+    height: 600px;
+}
+  {% elsif section.settings.slide_height == 'medium' %}
+        .hero-media {
+    height: 450px;
+}
+    {% elsif section.settings.slide_height == 'small' %}
+        .hero-media {
+    height: 350px;
+}
+  {% endif %}
   @media (max-width:768px){
+  .hero_content_inner {
+    position: absolute;
+    top: 50%;
+    left: 3%;
+    transform: translateY(-50%);
+    width: 100%;
+     max-width: 335px;
+}
   .hero-media img {
     display: block;
     height: 100%;
