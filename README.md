@@ -9,6 +9,7 @@ image-with-text.liquid<br>
 video-slider.liquid<br>
 image-banner-slider.liquid<br>
 O-Garantie.liquid<br>
+Trustpilot-Slider.liquid<br>
 
 
 Snippets:<br>
