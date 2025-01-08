@@ -519,7 +519,7 @@
 
         <div class="cart-drawer__footer" {{ block.shopify_attributes }}>
           {%- if settings.show_discount_code -%}
-          <div id="discount-container" >
+          <div id="discount-container" style="display: none;">
             <input type="text" placeholder="Gutscheincode" id="discount-code-input" autocomplete="on" value="">
             <button id="apply-discount-btn">Einlösen</button>
             <div class="discount-container-applied">
