@@ -13,26 +13,9 @@
     id="variant-selects-{{ section.id }}"
     data-section="{{ section.id }}"
     {{ block.shopify_attributes }}
-  >
+  style="margin-top: {{ block.settings.margin_top_v }}px; margin-bottom: {{ block.settings.margin_bottom_v }}px;">
     {%- for option in product.options_with_values -%}
-      {% if option.name == 'Farbe' or option.name == 'Color' %}
-        {% if block.settings.u_color_type == 'swatch' %}
-        {% assign picker_type = 'swatch' %}
-             {% elsif block.settings.u_color_type == 'button' %}
-        {% assign picker_type = 'button' %}
-          {% elsif  block.settings.u_color_type == 'dropdown' %}
-           {% assign picker_type = 'dropdown' %}
-          {% endif %}
-        {% endif %}
-            {% if option.name == 'Geschirrmaterial' or option.name == 'Color' %}
-             {% if block.settings.u_mat_type == 'button' %}
-        {% assign picker_type = 'button' %}
-          {% elsif  block.settings.u_mat_type == 'dropdown' %}
-           {% assign picker_type = 'dropdown' %}
-          {% endif %}
-        {% endif %}
-      {% comment %}
-    {%- liquid
+      {%- liquid
         assign swatch_count = option.values | map: 'swatch' | compact | size
         assign picker_type = block.settings.picker_type
 
@@ -44,7 +27,6 @@
           endif
         endif
       -%}
-      {% endcomment %}
       {%- if picker_type == 'swatch' -%}
         <fieldset class="js product-form__input product-form__input--swatch">
           <legend class="form__label">
@@ -79,7 +61,7 @@
             picker_type: picker_type
           %}
         </fieldset>
- {%- elsif picker_type == 'dropdown' -%}
+      {%- else -%}
         <div class="product-form__input product-form__input--dropdown">
                    <legend class="form__label {% if option.name == "Größe" or option.name == "Size" or option.name == "Schuhgröße" %}{% if block.settings.size_text != blank %}option-flex{% endif %}{% endif %}">{{ option.name }}
             {% if option.name == "Größe" or option.name == "Size" or option.name == "Schuhgröße" %}
