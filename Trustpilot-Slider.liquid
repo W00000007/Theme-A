@@ -1,0 +1,343 @@
+{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+{%- endstyle -%}
+
+<div class="review-wrapper section-{{ section.id }}-padding"  id="trustpilotReviews" style="background-color:{{ section.settings.bg }}">
+    <div class="reviewInner">
+        <div class="review-top">
+           <h3>{{ section.settings.title }}</h3>
+            <div class="swiper Review-slider">
+                <div class="swiper-wrapper">
+                  {% for block in section.blocks %}
+                    <div class="swiper-slide">
+                        <div class="review-Item" style="background-color: {{ section.settings.bg_card }}">
+                            {% if block.settings.image != blank %}
+                              <div class="review-image">
+                                {{ block.settings.image | image_url: width: 600 | image_tag: loading: 'lazy' }}
+                              </div>
+                            {% endif %}
+                            <div class="review-header">
+                                <svg xmlns="http://www.w3.org/2000/svg" id="" data-name="Calque 2" viewBox="0 0 1068 200" style="height: 18px;">
+                                  <defs><linearGradient id=""><stop offset="0%" stop-color="#00b67b"></stop><stop offset="0%" stop-color="#dbdce4" stop-opacity="1"></stop></linearGradient><style>.filled {fill: #00b67b;}.empty {fill: #dbdce4;}</style></defs><path class="filled" d="M0,0V200H200V0ZM130,127.5l13,39-43-31-43,30,16-50L30.5,84h53L100,33.5,116.5,84h53L101,134.5Z"></path><path class="filled" d="M217,0V200H417V0ZM347,127.5l13,39-43-31-43,30,16-50L247.5,84h53L317,33.5,333.5,84h53L318,134.5Z"></path><path class="filled" d="M434,0V200H634V0ZM564,127.5l13,39-43-31-43,30,16-50L464.5,84h53L534,33.5,550.5,84h53L535,134.5Z"></path><path class="filled" d="M651,0V200H851V0ZM781,127.5l13,39-43-31-43,30,16-50L681.5,84h53L751,33.5,767.5,84h53L752,134.5Z"></path><path class="filled" d="M868,0V200h200V0ZM998,127.5l13,39-43-31-43,30,16-50L898.5,84h53L968,33.5,984.5,84h53L969,134.5Z"></path>
+                                </svg>
+                                <p><svg class="checkmark" viewBox="0 0 16 16" width="32px" height="32px"><path fill="#6c6c85" d="M8,0C3.582,0,0,3.582,0,8s3.582,8,8,8s8-3.582,8-8S12.418,0,8,0z M7,12L3.48,8.48l1.414-1.414L7,9.172l4.71-4.71	l1.414,1.414L7,12z" data-darkreader-inline-fill="" style="--darkreader-inline-fill: #9c9386;"></path></svg>
+                                {{ section.settings.verified }}</p>
+                            </div>
+                            <div class="review-body">
+                                <h3>{{ block.settings.title }}</h3>
+                                <p>{{ block.settings.content }}</p>
+                                {% if block.settings.name != blank %}
+                                  <p class="reviewer_name">{{ block.settings.name }}</p>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                  {% endfor %}
+                </div>
+
+            </div>
+                <div class="swiper-button-next ts-next"></div>
+                <div class="swiper-button-prev ts-prev"></div>
+        </div>
+        <div class="review-bottom">
+            {{ section.settings.content }}
+        </div>
+    </div>
+</div>
+
+<script>
+var swiper = new Swiper(".Review-slider", {
+    slidesPerView: 1.4,
+    spaceBetween: 10,
+    centeredSlides: true,
+    loop: true,
+    autoplay: {
+        delay: 5000,
+        disableOnInteraction: false,
+    },
+    navigation: {
+        nextEl: ".ts-next",
+        prevEl: ".ts-prev",
+    },
+    grabCursor: true,
+    breakpoints: {
+        768: {
+            slidesPerView: 2,
+            spaceBetween: 30,
+            centeredSlides: false,
+            loop: false,
+        },
+        1024: {
+            slidesPerView: 5,
+            spaceBetween: 20,
+            centeredSlides: false,
+            loop: false,
+        },
+    },
+});
+</script>
+
+<style>
+#trustpilotReviews {
+  scroll-margin-top: 100px;
+}
+
+.titleReview {
+  display: flex;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.titleReview svg {
+  position: unset !important;
+  height: 22px !important;
+  width: auto !important;
+}
+
+.review-top {
+    padding-inline: 6rem;
+    position: relative;
+}
+
+.review-Item {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  font-size: 12px;
+  height: 100%;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.review-image {
+    margin: -20px -20px 20px;
+    position: relative;
+    padding-bottom: 70%;
+}
+  
+.review-image img {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    object-fit: cover;
+}
+
+.review-Left p {
+  font-size: 15px;
+  margin-top: 5px;
+}
+
+.review-Left p span {
+  text-underline-offset: 2px;
+}
+
+.review-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.review-header h3{
+  font-weight: bold;
+}
+
+.review-header p {
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+  .review-header p svg{
+    width: 15px;
+    height: auto;
+}
+
+.swiper-slide {
+  height: auto !important;
+}
+
+.review-wrapper .swiper-pagination-bullet-active {
+  background: #000 !important;
+}
+
+.review-body h3,
+.review-body .h3 {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.reviewer_name {
+  font-weight: 600;
+  margin-bottom: 0;
+}
+
+.review-top .swiper-button-next, .review-top .swiper-button-prev {
+    width: 4rem;
+    height: 4rem;
+    border: 1px solid rgba(0,0,0,0.4);
+    border-radius: 50%;
+}
+.review-top .swiper-button-next:after, .review-top .swiper-button-prev:after {
+    font-size: 16px;
+    font-weight: bold;
+    color: gray;
+}
+
+.review-top h3 {
+  font-size: 22px;
+  font-weight: bold;
+  text-align: center;
+}
+  
+.review-bottom {
+    padding: 2rem 3rem 0;
+    text-align: center;
+  letter-spacing: 0;
+}
+  .review-bottom p{
+    margin-bottom: 5px;
+  }
+@media screen and (max-width: 768px) {
+  .reviewInner {
+    flex-wrap: wrap;
+  }
+  .review-Left {
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 12px;
+  }
+  .review-Left svg.star-rating.dkt {
+    height: 25px !important;
+  }
+  .review-body h3,
+  .review-body .h3 {
+    font-size: 16px;
+  }
+  .review-Item {
+    font-size: 10px;
+  }
+  .titleReview {
+    font-size: 12px;
+  }
+  .titleReview svg {
+    height: 17px !important;
+  }
+  .review-top {
+    padding-inline: 0rem;
+  }
+  .ts-next,
+  .ts-prev{
+    display: none !important;
+  }
+  .review-bottom {
+    padding: 2rem 2rem 0;
+  }
+}
+</style>
+
+{% schema %}
+{
+  "name": "Trustpilot Slider",
+  "settings": [
+  {
+    "type": "header",
+    "content": "Section Spacing"
+  },
+  {
+    "type": "range",
+    "id": "padding_top",
+    "min": 0,
+    "max": 180,
+    "step": 2,
+    "unit": "px",
+    "label": "Padding Top",
+    "default": 40
+  },
+  {
+    "type": "range",
+    "id": "padding_bottom",
+    "min": 0,
+    "max": 180,
+    "step": 2,
+    "unit": "px",
+    "label": "Padding Bottom",
+    "default": 40
+  },
+    {
+           "type":"color",
+           "id":"bg",
+           "label":"Section Background"
+         },
+    {
+           "type":"color",
+           "id":"bg_card",
+           "label":"Reviews Background"
+         },
+    {
+           "type":"text",
+           "id":"title",
+           "label":"Title",
+           "default": "Customer Reviews"
+    },
+         {
+           "type":"richtext",
+           "id":"content",
+           "label":"Left Text",
+           "default": "<p><strong>4.7<\/strong> stars based on <span style=\"text-decoration:underline\">5284<\/span> reviews<\/p>"
+         },
+    {
+           "type":"text",
+           "id":"verified",
+           "label":"Verified Text on reviews",
+           "default": "Geverifieerd"
+         }
+       ],
+     "blocks":[
+      {
+        "type":"Review",
+        "name":"Review",
+        "settings":[
+          {
+            "type":"image_picker",
+            "id":"image",
+            "label":"Image"
+          },
+          {
+            "type":"text",
+            "id":"title",
+            "label":"Title",
+            "default": "Review title"
+          },
+          {
+            "type":"textarea",
+            "id":"content",
+            "label":"Content",
+            "default": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam"
+          },
+          {
+            "type":"text",
+            "id":"name",
+            "label":"Review Name",
+            "default": "Reviewer name"
+          }
+        ]
+      }
+    ],
+   "presets": [
+     {
+       "name": "Trustpilot Slider"
+     }
+   ]
+}
+{% endschema %}
