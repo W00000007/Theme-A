@@ -39,7 +39,7 @@
       padding-bottom: {{ section.settings.u_c_padding_bottom }}px;
     }
 .product-form__input{
-       margin-bottom: {{ section.settings.u_v_padding_bottom }}px;
+       margin-bottom: 15px;
 }
     .reviews-container-pdp{
       padding-bottom:{{section.settings.u_r_padding_bottom}}px;
@@ -170,7 +170,7 @@
 </div>
 
            {%- when 'shipping' -%}
-<div class="FB-shiping-container">
+<div class="FB-shiping-container" style="margin-top: {{ block.settings.margin_top_shipping }}px; margin-bottom: {{ block.settings.margin_bottom_shipping }}px;">
     <div class="FB-icon-shipping">
         <i class="bi bi-truck"></i>
         <span>{{ block.settings.shipping_info }}</span>
@@ -203,7 +203,7 @@
 </div>
            {%- when 'scarcity' -%}
       <p class="update-box product__text inline-richtext"
-          {{ block.shopify_attributes }}>
+          {{ block.shopify_attributes }} style="margin-top: {{ block.settings.margin_top_s }}px; margin-bottom: {{ block.settings.margin_bottom_s }}px;">
           {{- block.settings.scarcity -}}
         </p>
                       {% when 'stock-icon' %}
@@ -239,7 +239,7 @@
 }
               </style>
 {%- when 'icons_with_text' -%}
-<div class="icons-with-text-container">
+<div class="icons-with-text-container" style="margin-top: {{ block.settings.margin_top_iwt }}px; margin-bottom: {{ block.settings.margin_bottom_iwt }}px;">
   <div class="icon-wrapper" style="background-color: {{ block.settings.background_color }}; border-radius: {{ block.settings.border_radius }}px;">
     <img src="{{ block.settings.icon_one | img_url: 'master' }}" alt="Icon 1" />
     <div class="icon-title" style="color: {{ block.settings.text_color }};">
@@ -1029,6 +1029,26 @@
           "default": "Text",
           "label": "Scarcity"
         },
+        {
+          "type": "range",
+          "id": "margin_top_s",
+          "min": 0,
+          "max": 180,
+          "step": 2,
+          "unit": "px",
+          "label": "Margin top",
+           "default": 10
+          },
+        {
+          "type": "range",
+          "id": "margin_bottom_s",
+          "min": 0,
+          "max": 180,
+          "step": 2,
+          "unit": "px",
+          "label": "Margin Bottom",
+           "default": 10
+        },
       ]
     },
     {
@@ -1404,7 +1424,27 @@
       "id": "shipping_typo",
       "label": "Text 2",
       "default": "<p>In 2-3 Tagen bei Dir</p>"
-    }
+    },
+    {
+      "type": "range",
+      "id": "margin_top_shipping",
+      "min": 0,
+      "max": 180,
+      "step": 2,
+      "unit": "px",
+      "label": "Margin top",
+       "default": 10
+      },
+    {
+      "type": "range",
+      "id": "margin_bottom_shipping",
+      "min": 0,
+      "max": 180,
+      "step": 2,
+      "unit": "px",
+      "label": "Margin Bottom",
+       "default": 10
+    },
   ]
 },
 {
@@ -1539,6 +1579,26 @@
       "max": 50
     },
     {
+      "type": "range",
+      "id": "margin_top_iwt",
+      "min": 0,
+      "max": 180,
+      "step": 2,
+      "unit": "px",
+      "label": "Margin top",
+       "default": 10
+      },
+    {
+      "type": "range",
+      "id": "margin_bottom_iwt",
+      "min": 0,
+      "max": 180,
+      "step": 2,
+      "unit": "px",
+      "label": "Margin Bottom",
+       "default": 10
+    },
+    {
       "type": "color",
       "id": "background_color",
       "label": "Background color",
@@ -1658,56 +1718,20 @@
       "settings": [
         {
           "type": "select",
-          "id": "u_color_type",
-          "label":"Color",
+          "id": "picker_type",
           "options": [
             {
               "value": "dropdown",
-              "label": "Dropdown"
-            },
-            {
-              "value": "swatch",
-              "label": "Swatch"
+              "label": "t:sections.main-product.blocks.variant_picker.settings.picker_type.options__1.label"
             },
             {
               "value": "button",
-              "label": "Capsules"
+              "label": "t:sections.main-product.blocks.variant_picker.settings.picker_type.options__2.label"
             }
           ],
-          "default": "button"
-         },
-         {
-          "type": "select",
-          "id": "u_mat_type",
-          "label":"Material",
-          "options": [
-            {
-              "value": "dropdown",
-              "label": "Dropdown"
-            },
-            {
-              "value": "button",
-              "label": "Capsules"
-            }
-          ],
-          "default": "button"
-         },
-                 {
-          "type": "select",
-          "id": "u_size_type",
-          "label":"Size",
-          "options": [
-            {
-              "value": "dropdown",
-              "label": "Dropdown"
-            },
-            {
-              "value": "button",
-              "label": "Capsules"
-            }
-          ],
-          "default": "button"
-         },
+          "default": "button",
+          "label": "t:sections.main-product.blocks.variant_picker.settings.picker_type.label"
+        },
         {
           "id": "swatch_shape",
           "label": "t:sections.main-product.blocks.variant_picker.settings.swatch_shape.label",
@@ -1738,7 +1762,27 @@
           "type": "page",
           "id": "size_guide",
           "label": "Size Guide"
-        }
+        },
+    {
+      "type": "range",
+      "id": "margin_top_v",
+      "min": 0,
+      "max": 180,
+      "step": 2,
+      "unit": "px",
+      "label": "Margin top",
+       "default": 10
+      },
+    {
+      "type": "range",
+      "id": "margin_bottom_v",
+      "min": 0,
+      "max": 180,
+      "step": 2,
+      "unit": "px",
+      "label": "Margin Bottom",
+       "default": 10
+    },
       ]
     },
     {
