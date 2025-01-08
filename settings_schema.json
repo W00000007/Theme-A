@@ -1477,7 +1477,14 @@
       {
         "type": "number",
         "id": "free_shipping_price",
-        "label": "Free Shipping Amount in €",
+        "label": "Free Shipping Bar Amount in €",
+        "placeholder": "100"
+      },
+        {
+        "type": "text",
+        "id": "u_shipping_price",
+        "label": "Shipping Amount in €",
+        "info":"Shipping amount for below shipping thresold bar",
         "placeholder": "100"
       },
       {
@@ -1496,7 +1503,17 @@
         "id": "success_text",
         "label": "Erfolgstext"
       },
+       {
+        "type": "header",
+        "content": "Du sparst"
+      },
       {
+        "type": "checkbox",
+        "id": "enable_savings",
+        "default": true,
+        "label": "Enable savings"
+      },
+       {
         "type": "header",
         "content": "Upsell"
       },
@@ -1519,16 +1536,6 @@
         "type": "product",
         "id": "product3",
         "label": "Product 3"
-      },
-      {
-        "type": "header",
-        "content": "Discount Code"
-      },
-      {
-        "type": "checkbox",
-        "id": "show_discount_code",
-        "label": "Discount Code",
-        "default": false
       },
     ]
   }
