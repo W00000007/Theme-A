@@ -207,7 +207,7 @@
           {{- block.settings.scarcity -}}
         </p>
                       {% when 'stock-icon' %}
-                      <div id="inventory-text" class="ed-delivery-wrapper" >
+                      <div id="inventory-text" class="ed-delivery-wrapper" style="margin-top: {{ block.settings.margin_top_icon }}px; margin-bottom: {{ block.settings.margin_bottom_icon }}px;">
   <span class="inventory inventory--high">
     <div class="bullet-main-container">
       <div class="bullet-pr-container">
@@ -314,15 +314,15 @@
               {%- when 'reviews' -%}
            <div class="reviews-container-pdp"> {% if block.settings.show_stars %}{% render 'hero-slide-stars' %}{% endif %} {{ block.settings.review_text }}</div>
               {%- when 'price' -%}
-                <div id="price-{{ section.id }}" role="status" class="u_pro_price_block"{{ block.shopify_attributes }}>
+                <div id="price-{{ section.id }}" role="status" class="u_pro_price_block"{{ block.shopify_attributes }} style="margin-top: {{ block.settings.margin_top_price }}px; margin-bottom: {{ block.settings.margin_bottom_price }}px;">
                   {%- render 'price',
                     product: product,
                     use_variant: true,
                     show_badges: true,
                     price_class: 'price--large'
                   -%}
+                 <div class="tax-shipping-text">{{ block.settings.tax_shipping }}</div>
                 </div>
-                <div class="tax-shipping-text">{{ block.settings.tax_shipping }}</div>
                 {%- if product.quantity_price_breaks_configured? -%}
                   <div class="volume-pricing-note" id="Volume-Note-{{ section.id }}">
                     <span>{{ 'products.product.volume_pricing.note' | t }}</span>
@@ -1072,7 +1072,27 @@
       "type": "richtext",
       "id": "tax_shipping",
       "label": "Steuern + Versand"
-    }
+    },
+    {
+      "type": "range",
+      "id": "margin_top_price",
+      "min": 0,
+      "max": 180,
+      "step": 2,
+      "unit": "px",
+      "label": "Margin top",
+       "default": 10
+      },
+    {
+      "type": "range",
+      "id": "margin_bottom_price",
+      "min": 0,
+      "max": 180,
+      "step": 2,
+      "unit": "px",
+      "label": "Margin Bottom",
+       "default": 10
+    },
   ]
 },
 {
@@ -1633,7 +1653,27 @@
       "id": "text_color",
       "label": "Text color",
       "default": "#000"
-    }
+    },
+    {
+      "type": "range",
+      "id": "margin_top_icon",
+      "min": 0,
+      "max": 180,
+      "step": 2,
+      "unit": "px",
+      "label": "Margin top",
+       "default": 10
+      },
+    {
+      "type": "range",
+      "id": "margin_bottom_icon",
+      "min": 0,
+      "max": 180,
+      "step": 2,
+      "unit": "px",
+      "label": "Margin Bottom",
+       "default": 10
+    },
   ]
 },
     {
