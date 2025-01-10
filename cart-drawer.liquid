@@ -576,18 +576,18 @@
 
   
 
-    <div class="cart__total-container-2">
-        <span class="cart-heading" style="font-size: 12px; color: green;">Du sparst</span>
-        <span id="total-discount" style="font-size: 12px; font-weight: 700; color: green;">
-            {{ cart.total_discount | money_with_currency }}
-        </span>
-    </div>
-  {% assign total_compared_price = 0 %}
+{% assign total_compared_price = 0 %}
+{% assign total_discount = 0 %}
 {% assign shipping_discount = 0 %}
 
 {% for item in cart.items %}
     {% if item.variant.compare_at_price %}
         {% assign compared_item_price = item.variant.compare_at_price | times: item.quantity %}
+        {% assign regular_item_price = item.variant.price | times: item.quantity %}
+        
+        {% assign item_discount = compared_item_price | minus: regular_item_price %}
+        {% assign total_discount = total_discount | plus: item_discount %}
+        
         {% assign total_compared_price = total_compared_price | plus: compared_item_price %}
     {% else %}
         {% assign compared_item_price = item.original_price | times: item.quantity %}
@@ -596,6 +596,13 @@
 {% endfor %}
 
 {% assign total_discount = total_compared_price | minus: cart.total_price %}
+
+<div class="cart__total-container-2">
+    <span class="cart-heading" style="font-size: 12px; color: green;">Du sparst</span>
+    <span id="total-discount" style="font-size: 12px; font-weight: 700; color: green;">
+        {{ total_discount | money_with_currency }}
+    </span>
+</div>
 
 {% if cart.total_price > 4000 %}
     {% assign shipping_discount = 290 %}
